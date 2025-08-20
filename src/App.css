@@ -207,4 +207,13 @@ button:hover, a.glass-link:hover {
   flex-wrap: wrap; /* На мобильных переносим, если не помещается */
 }
 
+/* Общий контейнер для контента страниц */
+.page-container {
+  padding: 1rem 1.5rem; /* отступ сверху/снизу 1rem, слева/справа 1.5rem */
+  max-width: 420px; /* ограничение ширины на больших экранах */
+  margin: 0 auto; /* центрирование по горизонтали */
+  box-sizing: border-box;
+}
+
+
 
