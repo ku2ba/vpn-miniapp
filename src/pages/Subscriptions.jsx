@@ -65,6 +65,13 @@ export default function Subscriptions() {
             <GlassLink onClick={() => setInfoPreset(preset)}>Инфо</GlassLink>
             <GlassLink onClick={() => handleChoose(preset)}>Выбрать</GlassLink>
           </div>
+
+          <div className="flex items-center gap-3 flex-shrink-0">
+            <span className="font-semibold text-gray-800">{preset.price}₽</span>
+            <GlassLink onClick={() => setInfoPreset(preset)}>Инфо</GlassLink>
+            <GlassLink onClick={() => handleChoose(preset)}>Выбрать</GlassLink>
+          </div>
+
         </div>
       ))}
 
