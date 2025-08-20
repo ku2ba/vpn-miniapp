@@ -199,3 +199,12 @@ button:hover, a.glass-link:hover {
   transition: all 0.3s ease;
 }
 
+/* Подписки: кнопки рядом, не накладываются */
+.presets-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap; /* На мобильных переносим, если не помещается */
+}
+
+
