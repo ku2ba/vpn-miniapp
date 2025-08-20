@@ -1,0 +1,153 @@
+/* Базовые стили для всего приложения */
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(to bottom right, #ffe4e1, #f0f8ff, #e0fff0);
+  color: #333;
+}
+
+.app-container {
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Glassmorphism для всех блоков */
+.bg-glass {
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 1rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Стиль для текстов и заголовков */
+h2, h3 {
+  color: #444;
+}
+
+p, span {
+  color: #555;
+}
+
+/* Кнопки в стиле стекла */
+button, a.glass-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  color: #333;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+button:hover, a.glass-link:hover {
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
+/* Модальные окна */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+}
+
+.modal-content {
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  max-width: 600px;
+  width: 90%;
+  color: #444;
+  position: relative;
+}
+
+/* Крестик закрытия модалки */
+.modal-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #444;
+  cursor: pointer;
+}
+
+/* Плавающий виджет Telegram */
+.telegram-widget {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background: linear-gradient(to bottom right, #4c9fff, #80d4ff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  cursor: pointer;
+  z-index: 60;
+  transition: all 0.2s ease;
+}
+
+.telegram-widget:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+
+/* Стиль Navbar */
+.navbar {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  backdrop-filter: blur(15px);
+  background: rgba(255,255,255,0.3);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  border-radius: 2rem;
+  padding: 0.5rem 1rem;
+  display: flex;
+  gap: 1.5rem;
+  z-index: 50;
+}
+
+.navbar a {
+  position: relative;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  color: #444;
+  border-radius: 2rem;
+  transition: all 0.3s ease;
+}
+
+.navbar a:hover {
+  color: #ff6b81;
+}
+
+.navbar .active-indicator {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-radius: 2rem;
+  background: rgba(255,255,255,0.5);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+  z-index: -1;
+}
