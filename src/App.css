@@ -1,8 +1,9 @@
 /* Базовые стили для всего приложения */
 body {
   margin: 0;
-  font-family: 'Inter', sans-serif;
-  background: linear-gradient(to bottom right, #ffe4e1, #f0f8ff, #e0fff0);
+  font-family: 'Manrope', sans-serif;
+  background: linear-gradient(135deg, #FFE5E5 0%, #FFF0F5 25%, #F0F8FF 50%, #F0FFF0 75%, #FFF8F0 100%);
+  background-attachment: fixed;
   color: #333;
 }
 
@@ -53,6 +54,30 @@ button:hover, a.glass-link:hover {
   transform: translateY(-2px);
 }
 
+.glass-link.outline {
+  background: transparent !important;
+  border: 2px solid #FF9F92 !important;
+  color: #FF9F92 !important;
+}
+.glass-link.outline:hover {
+  background: rgba(255,159,146,0.08) !important;
+}
+
+.btn-xs-text {
+  font-size: 0.82rem;
+  line-height: 1.1;
+}
+
+.btn-lg-padding {
+  padding-top: 0.75rem !important;
+  padding-bottom: 0.75rem !important;
+}
+
+.btn-lg-x-padding {
+  padding-left: 1.2rem !important;
+  padding-right: 1.2rem !important;
+}
+
 /* Модальные окна */
 .modal-overlay {
   position: fixed;
@@ -70,7 +95,7 @@ button:hover, a.glass-link:hover {
   -webkit-backdrop-filter: blur(10px);
   border-radius: 1rem;
   padding: 1.5rem;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
   max-width: 600px;
   width: 90%;
   color: #444;
@@ -91,129 +116,100 @@ button:hover, a.glass-link:hover {
 /* Плавающий виджет Telegram */
 .telegram-widget {
   position: fixed;
-  bottom: 1.5rem;
-  right: 1.5rem;
-  width: 3.5rem;
-  height: 3.5rem;
-  border-radius: 50%;
-  background: linear-gradient(to bottom right, #4c9fff, #80d4ff);
+  right: 10rem;
+  bottom: 5.5rem;
+  z-index: 200;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-  cursor: pointer;
-  z-index: 60;
-  transition: all 0.2s ease;
 }
 
-.telegram-widget:hover {
+.telegram-btn {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4c9fff 0%, #80d4ff 100%);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  border: 3px solid #fff;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.telegram-btn:hover {
   transform: scale(1.1);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  box-shadow: 0 12px 36px rgba(0,0,0,0.22);
 }
 
-/* Стиль Navbar */
+/* Стиль Navbar - исправленная навигация внизу */
 .navbar {
   position: fixed;
-  top: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 0;
+  left: 0;
+  right: 0;
   backdrop-filter: blur(15px);
-  background: rgba(255,255,255,0.3);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-  border-radius: 2rem;
-  padding: 0.5rem 1rem;
-  display: flex;
-  gap: 1.5rem;
+  background: transparent;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+  border-top: 1px solid rgba(255,255,255,0.3);
+  padding: 0.75rem 1rem;
   z-index: 50;
+}
+
+.navbar ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 24rem;
+  margin: 0 auto;
+  list-style: none;
+  padding: 0;
+}
+
+.navbar li {
+  flex: 1;
+  text-align: center;
 }
 
 .navbar a {
   position: relative;
-  padding: 0.5rem 1rem;
+  display: block;
+  padding: 0.5rem 0.75rem;
   font-weight: 500;
-  color: #444;
-  border-radius: 2rem;
+  color: #000;
+  border-radius: 1rem;
   transition: all 0.3s ease;
+  text-decoration: none;
+  font-size: 0.875rem;
 }
 
 .navbar a:hover {
   color: #ff6b81;
+  background: rgba(255,107,129,0.1);
+}
+
+.navbar a.active {
+  color: #ff6b81;
+  font-weight: 600;
 }
 
 .navbar .active-indicator {
   position: absolute;
   top: 0;
   bottom: 0;
-  border-radius: 2rem;
-  background: rgba(255,255,255,0.5);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  left: 0;
+  right: 0;
+  border-radius: 1rem;
+  background: rgba(255,107,129,0.2);
+  box-shadow: 0 2px 10px rgba(255,107,129,0.2);
   transition: all 0.3s ease;
   z-index: -1;
 }
 
-/* Меню снизу, центрировано */
-.navbar-bottom {
-  position: fixed;
-  bottom: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: 420px;
-  background: rgba(255,255,255,0.3);
-  backdrop-filter: blur(15px);
-  border-radius: 2rem;
-  padding: 0.5rem 0;
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-  z-index: 50;
+.icon-gap {
+  margin-right: 0.5em;
 }
 
-.nav-link {
-  position: relative;
-  padding: 0.5rem 1rem;
-  font-weight: 500;
-  color: #444;
-  border-radius: 2rem;
-  text-align: center;
-  flex: 1;
-  transition: all 0.3s ease;
+.mb-last-subscription {
+  margin-bottom: 80px;
 }
-
-.nav-link.active {
-  /* Стили подсветки активной кнопки будут через motion рамку */
-  color: #222;
-}
-
-/* Плавная рамка для активной страницы */
-.active-indicator-glass {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 25%;
-  border-radius: 2rem;
-  background: rgba(255,255,255,0.3);
-  backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
-}
-
-/* Подписки: кнопки рядом, не накладываются */
-.presets-row {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  flex-wrap: wrap; /* На мобильных переносим, если не помещается */
-}
-
-/* Общий контейнер для контента страниц */
-.page-container {
-  padding: 1rem 1.5rem; /* отступ сверху/снизу 1rem, слева/справа 1.5rem */
-  max-width: 420px; /* ограничение ширины на больших экранах */
-  margin: 0 auto; /* центрирование по горизонтали */
-  box-sizing: border-box;
-}
-
-
-
