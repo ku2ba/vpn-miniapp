@@ -1,15 +1,19 @@
 import { useState } from "react";
 import GlassLink from "../components/GlassLink";
+import UserInfo from "../components/UserInfo";
 import { FaCopy } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { FaKey } from "react-icons/fa";
 
-export default function Home() {
+export default function Home({ user }) {
   // Заглушка текущей подписки
   const [subscription, setSubscription] = useState(null); // null или { name: 'Preset 1', active: true }
   const [key, setKey] = useState(""); // сюда будет ключ после нажатия
   const [copied, setCopied] = useState(false);
   const [userBalance, setUserBalance] = useState(0); // Add balance state
+
+  // Логируем данные пользователя для отладки
+  console.log('User data:', user);
 
   const handleGetKey = () => {
     if (subscription && subscription.active) {
@@ -60,6 +64,23 @@ export default function Home() {
           </motion.p>
         </div>
 
+        {/* Информация о пользователе */}
+        <UserInfo user={user} />
+        
+        {/* Временная отладка */}
+        <motion.div 
+          className="glass rounded-2xl p-4 text-center mb-4"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.15, duration: 0.6 }}
+        >
+          <div className="text-text-muted text-sm">Отладка:</div>
+          <div className="text-text-primary text-sm">
+            User: {user ? 'Есть' : 'Нет'} | 
+            ID: {user?.id || 'Не найден'}
+          </div>
+        </motion.div>
+
         {/* Основной контент */}
         <div className="space-y-6">
           {/* Balance block */}
@@ -71,6 +92,27 @@ export default function Home() {
           >
             <span className="text-text-muted text-sm">Ваш текущий баланс: </span>
             <span className="text-xl font-bold text-text-primary">{userBalance}₽</span>
+            <div className="mt-2">
+              <span className="text-text-muted text-sm">Действительна ~7 дней</span>
+            </div>
+          </motion.div>
+
+          {/* Trial activation button */}
+          <motion.div 
+            className="text-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7, duration: 0.6 }}
+          >
+            <GlassLink 
+              onClick={() => alert('Пробный период активирован!')}
+              variant="primary"
+              size="md"
+              className="w-full"
+              style={{ backgroundColor: '#10B981', borderColor: '#10B981' }}
+            >
+              Активировать пробный период
+            </GlassLink>
           </motion.div>
 
           {/* VPN Ключ */}
