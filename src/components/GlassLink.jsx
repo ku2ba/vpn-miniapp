@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 export default function GlassLink({ children, onClick, href, variant = "primary", size = "md", className = "" }) {
   const baseClasses = "inline-flex items-center justify-center font-medium transition-all duration-300 rounded-2xl cursor-pointer border border-transparent";
@@ -18,17 +19,31 @@ export default function GlassLink({ children, onClick, href, variant = "primary"
 
   const classes = `${baseClasses} ${variants[variant]} ${sizes[size]} ${className}`;
 
+  // Проверяем, является ли ссылка внутренней (начинается с /)
+  const isInternalLink = href && href.startsWith('/');
+
   return href ? (
-    <motion.a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
-      className={classes}
-    >
-      {children}
-    </motion.a>
+    isInternalLink ? (
+      <motion.div
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
+      >
+        <Link to={href} className={classes}>
+          {children}
+        </Link>
+      </motion.div>
+    ) : (
+      <motion.a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
+        className={classes}
+      >
+        {children}
+      </motion.a>
+    )
   ) : (
     <motion.button
       onClick={onClick}

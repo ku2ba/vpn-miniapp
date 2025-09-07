@@ -140,7 +140,8 @@ export default function Subscriptions() {
         <AnimatePresence>
           {infoPreset && (
             <motion.div
-              className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+              className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4"
+              style={{ zIndex: 1000 }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -189,7 +190,8 @@ export default function Subscriptions() {
         <AnimatePresence>
           {confirmPreset && (
             <motion.div
-              className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+              className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4"
+              style={{ zIndex: 1000 }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}

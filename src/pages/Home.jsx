@@ -2,12 +2,14 @@ import { useState } from "react";
 import GlassLink from "../components/GlassLink";
 import { FaCopy } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { FaKey } from "react-icons/fa";
 
 export default function Home() {
   // Заглушка текущей подписки
   const [subscription, setSubscription] = useState(null); // null или { name: 'Preset 1', active: true }
   const [key, setKey] = useState(""); // сюда будет ключ после нажатия
   const [copied, setCopied] = useState(false);
+  const [userBalance, setUserBalance] = useState(0); // Add balance state
 
   const handleGetKey = () => {
     if (subscription && subscription.active) {
@@ -33,7 +35,7 @@ export default function Home() {
   return (
     <div className="min-h-screen flex items-center justify-center py-8">
       <motion.div 
-        className="w-full max-w-sm"
+        className="w-full max-w-sm mx-auto px-4"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -60,12 +62,23 @@ export default function Home() {
 
         {/* Основной контент */}
         <div className="space-y-6">
+          {/* Balance block */}
+          <motion.div 
+            className="glass rounded-2xl p-4 text-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.6 }}
+          >
+            <span className="text-text-muted text-sm">Ваш текущий баланс: </span>
+            <span className="text-xl font-bold text-text-primary">{userBalance}₽</span>
+          </motion.div>
+
           {/* Подписка */}
           <motion.div 
             className="glass-strong rounded-2xl p-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.6 }}
+            transition={{ delay: 0.8, duration: 0.6 }}
           >
             <h2 className="text-lg font-semibold text-text-primary mb-4 text-center">Текущая подписка</h2>
             
@@ -99,7 +112,7 @@ export default function Home() {
             className="glass-strong rounded-2xl p-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.6 }}
+            transition={{ delay: 1.0, duration: 0.6 }}
           >
             <h2 className="text-lg font-semibold text-text-primary mb-4 text-center">VPN Ключ</h2>
             
