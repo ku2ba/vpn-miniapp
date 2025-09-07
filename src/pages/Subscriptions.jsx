@@ -1,6 +1,7 @@
 import { useState } from "react";
 import GlassLink from "../components/GlassLink";
-import { motion, AnimatePresence } from "framer-motion";
+import ModalPortal from "../components/ModalPortal";
+import { motion } from "framer-motion";
 import { FaInfoCircle, FaCheck } from "react-icons/fa";
 
 const presets = [
@@ -53,13 +54,14 @@ export default function Subscriptions() {
   };
 
   return (
-    <div className="min-h-screen py-8">
-      <motion.div 
-        className="w-full max-w-sm mx-auto px-4"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
+    <>
+      <div className="min-h-screen py-8">
+        <motion.div 
+          className="w-full max-w-sm mx-auto px-4"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
         {/* Заголовок */}
         <div className="text-center mb-4">
           <motion.h1 
@@ -135,125 +137,88 @@ export default function Subscriptions() {
             </motion.div>
           ))}
         </div>
+        </motion.div>
+      </div>
 
-        {/* Модальное окно Инфо */}
-        <AnimatePresence>
-          {infoPreset && (
-            <motion.div
-              className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4"
-              style={{ zIndex: 1000 }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setInfoPreset(null)}
-            >
-              <motion.div
-                className="glass-strong rounded-2xl p-6 w-full max-w-sm relative"
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.8, opacity: 0 }}
-                onClick={(e) => e.stopPropagation()}
-              >
-                <button
-                  className="absolute top-4 right-4 text-text-muted hover:text-text-primary text-xl font-bold transition-colors"
-                  onClick={() => setInfoPreset(null)}
-                >
-                  ✕
-                </button>
-                
-                <div className="text-center mb-4">
-                  <h3 className="text-xl font-semibold text-text-primary mb-2">{infoPreset.name}</h3>
-                  <p className="text-text-muted text-sm">Подробная информация</p>
-                </div>
-                
-                <p className="text-text-secondary leading-relaxed mb-4 text-left text-sm">{infoPreset.info}</p>
-                
-                <div className="flex justify-between items-center">
-                  <div className="text-xl font-bold text-text-primary">{infoPreset.price}₽/месяц</div>
-                  <GlassLink 
-                    onClick={() => {
-                      setInfoPreset(null);
-                      handleChoose(infoPreset);
-                    }}
-                    variant="primary"
-                    size="sm"
-                  >
-                    Выбрать
-                  </GlassLink>
-                </div>
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+      {/* Модальное окно Инфо */}
+      <ModalPortal isOpen={!!infoPreset} onClose={() => setInfoPreset(null)}>
+        <button
+          className="absolute top-4 right-4 text-text-muted hover:text-text-primary text-xl font-bold transition-colors"
+          onClick={() => setInfoPreset(null)}
+        >
+          ✕
+        </button>
+        
+        <div className="text-center mb-4">
+          <h3 className="text-xl font-semibold text-text-primary mb-2">{infoPreset?.name}</h3>
+          <p className="text-text-muted text-sm">Подробная информация</p>
+        </div>
+        
+        <p className="text-text-secondary leading-relaxed mb-4 text-left text-sm">{infoPreset?.info}</p>
+        
+        <div className="flex justify-between items-center">
+          <div className="text-xl font-bold text-text-primary">{infoPreset?.price}₽/месяц</div>
+          <GlassLink 
+            onClick={() => {
+              setInfoPreset(null);
+              handleChoose(infoPreset);
+            }}
+            variant="primary"
+            size="sm"
+          >
+            Выбрать
+          </GlassLink>
+        </div>
+      </ModalPortal>
 
-        {/* Модальное окно Подтверждения покупки */}
-        <AnimatePresence>
-          {confirmPreset && (
-            <motion.div
-              className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4"
-              style={{ zIndex: 1000 }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setConfirmPreset(null)}
-            >
-              <motion.div
-                className="glass-strong rounded-2xl p-6 w-full max-w-sm relative"
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.8, opacity: 0 }}
-                onClick={(e) => e.stopPropagation()}
-              >
-                <button
-                  className="absolute top-4 right-4 text-text-muted hover:text-text-primary text-xl font-bold transition-colors"
-                  onClick={() => setConfirmPreset(null)}
-                >
-                  ✕
-                </button>
+      {/* Модальное окно Подтверждения покупки */}
+      <ModalPortal isOpen={!!confirmPreset} onClose={() => setConfirmPreset(null)}>
+        <button
+          className="absolute top-4 right-4 text-text-muted hover:text-text-primary text-xl font-bold transition-colors"
+          onClick={() => setConfirmPreset(null)}
+        >
+          ✕
+        </button>
 
-                <div className="text-center mb-6">
-                  <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${confirmPreset.color} flex items-center justify-center shadow-lg mx-auto mb-3`}>
-                    <span className="text-2xl text-white font-bold">{confirmPreset.name.charAt(0)}</span>
-                  </div>
-                  <h3 className="text-xl font-semibold text-text-primary mb-2">Подтверждение покупки</h3>
-                  <p className="text-text-muted text-sm">Подписка: {confirmPreset.name}</p>
-                </div>
+        <div className="text-center mb-6">
+          <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${confirmPreset?.color} flex items-center justify-center shadow-lg mx-auto mb-3`}>
+            <span className="text-2xl text-white font-bold">{confirmPreset?.name.charAt(0)}</span>
+          </div>
+          <h3 className="text-xl font-semibold text-text-primary mb-2">Подтверждение покупки</h3>
+          <p className="text-text-muted text-sm">Подписка: {confirmPreset?.name}</p>
+        </div>
 
-                {userBalance >= confirmPreset.price ? (
-                  <div className="space-y-4">
-                    <div className="bg-bg-tertiary rounded-xl p-4 border border-border-light">
-                      <p className="text-text-secondary text-center leading-relaxed text-sm">
-                        После нажатия кнопки <strong>Подтвердить</strong> с вашего баланса спишутся средства в размере <strong>{confirmPreset.price}₽</strong> и подписка будет активирована. На главной нажмите <strong>Получить ключ</strong>.
-                      </p>
-                    </div>
-                    
-                    <div className="flex gap-3">
-                      <GlassLink onClick={handleConfirmPurchase} variant="primary" size="md" className="flex-1">
-                        <FaCheck className="mr-2" />
-                        Подтвердить
-                      </GlassLink>
-                      <GlassLink href="https://t.me/your_support_bot" variant="outline" size="md" className="flex-1">
-                        Поддержка
-                      </GlassLink>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="text-center space-y-4">
-                    <div className="bg-error/20 rounded-xl p-4 border border-error/30">
-                      <p className="text-error text-sm">
-                        Для активации подписки пополните баланс на <strong>{confirmPreset.price}₽</strong>
-                      </p>
-                    </div>
-                    <GlassLink href="/payment" variant="primary" size="md" className="w-full">
-                      Пополнить баланс
-                    </GlassLink>
-                  </div>
-                )}
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.div>
-    </div>
+        {userBalance >= (confirmPreset?.price || 0) ? (
+          <div className="space-y-4">
+            <div className="bg-bg-tertiary rounded-xl p-4 border border-border-light">
+              <p className="text-text-secondary text-center leading-relaxed text-sm">
+                После нажатия кнопки <strong>Подтвердить</strong> с вашего баланса спишутся средства в размере <strong>{confirmPreset?.price}₽</strong> и подписка будет активирована. На главной нажмите <strong>Получить ключ</strong>.
+              </p>
+            </div>
+            
+            <div className="flex gap-3">
+              <GlassLink onClick={handleConfirmPurchase} variant="primary" size="md" className="flex-1">
+                <FaCheck className="mr-2" />
+                Подтвердить
+              </GlassLink>
+              <GlassLink href="https://t.me/your_support_bot" variant="outline" size="md" className="flex-1">
+                Поддержка
+              </GlassLink>
+            </div>
+          </div>
+        ) : (
+          <div className="text-center space-y-4">
+            <div className="bg-error/20 rounded-xl p-4 border border-error/30">
+              <p className="text-error text-sm">
+                Для активации подписки пополните баланс на <strong>{confirmPreset?.price}₽</strong>
+              </p>
+            </div>
+            <GlassLink href="/payment" variant="primary" size="md" className="w-full">
+              Пополнить баланс
+            </GlassLink>
+          </div>
+        )}
+      </ModalPortal>
+    </>
   );
 }

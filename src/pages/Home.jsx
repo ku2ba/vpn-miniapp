@@ -73,46 +73,12 @@ export default function Home() {
             <span className="text-xl font-bold text-text-primary">{userBalance}₽</span>
           </motion.div>
 
-          {/* Подписка */}
-          <motion.div 
-            className="glass-strong rounded-2xl p-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.6 }}
-          >
-            <h2 className="text-lg font-semibold text-text-primary mb-4 text-center">Текущая подписка</h2>
-            
-            {subscription ? (
-              <div className="space-y-3 text-center">
-                <div className="px-4 py-2 rounded-xl bg-primary/20 text-text-primary font-medium border border-primary/30">
-                  {subscription.name}
-                </div>
-                <span
-                  className={`inline-block px-3 py-1 rounded-full text-sm font-semibold ${
-                    subscription.active 
-                      ? "bg-success/20 text-success border border-success/30" 
-                      : "bg-error/20 text-error border border-error/30"
-                  }`}
-                >
-                  {subscription.active ? "Активна" : "Неактивна"}
-                </span>
-              </div>
-            ) : (
-              <div className="text-center py-4">
-                <p className="text-text-secondary mb-4 text-sm">У вас пока нет активной подписки</p>
-                <GlassLink href="/subscriptions" variant="primary" size="md" className="w-full btn-xs-text btn-lg-x-padding">
-                  Выбрать подписку
-                </GlassLink>
-              </div>
-            )}
-          </motion.div>
-
           {/* VPN Ключ */}
           <motion.div 
             className="glass-strong rounded-2xl p-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.0, duration: 0.6 }}
+            transition={{ delay: 0.8, duration: 0.6 }}
           >
             <h2 className="text-lg font-semibold text-text-primary mb-4 text-center">VPN Ключ</h2>
             
@@ -157,12 +123,46 @@ export default function Home() {
                       size="md"
                       className="w-full btn-xs-text btn-lg-x-padding outline glass-link"
                     >
-                      Перейти к подпискам
+                      Получить ключ
                     </GlassLink>
                   )}
                 </div>
               )}
             </div>
+          </motion.div>
+
+          {/* Подписка */}
+          <motion.div 
+            className="glass-strong rounded-2xl p-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.0, duration: 0.6 }}
+          >
+            <h2 className="text-lg font-semibold text-text-primary mb-4 text-center">Текущая подписка</h2>
+            
+            {subscription ? (
+              <div className="space-y-3 text-center">
+                <div className="px-4 py-2 rounded-xl bg-primary/20 text-text-primary font-medium border border-primary/30">
+                  {subscription.name}
+                </div>
+                <span
+                  className={`inline-block px-3 py-1 rounded-full text-sm font-semibold ${
+                    subscription.active 
+                      ? "bg-success/20 text-success border border-success/30" 
+                      : "bg-error/20 text-error border border-error/30"
+                  }`}
+                >
+                  {subscription.active ? "Активна" : "Неактивна"}
+                </span>
+              </div>
+            ) : (
+              <div className="text-center py-4">
+                <p className="text-text-secondary mb-4 text-sm">У вас пока нет активной подписки</p>
+                <GlassLink href="/subscriptions" variant="primary" size="md" className="w-full btn-xs-text btn-lg-x-padding">
+                  Выбрать подписку
+                </GlassLink>
+              </div>
+            )}
           </motion.div>
         </div>
 
