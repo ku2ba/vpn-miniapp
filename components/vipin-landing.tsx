@@ -1,4 +1,12 @@
 import type { ReactNode } from "react";
+import { HeroHeadline } from "@/components/hero-headline";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 import {
   ArrowUpRight,
   Bot,
@@ -65,13 +73,11 @@ export function VipinLanding() {
       <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-16 px-4 py-12 sm:gap-20 sm:px-6 sm:py-16">
         {/* Hero */}
         <section className="flex flex-col gap-6 text-center sm:text-left">
-          <p className="inline-flex items-center justify-center gap-2 self-center rounded-full border border-border/60 bg-muted/50 px-3 py-1 text-xs font-medium text-muted-foreground sm:self-start">
-            <Sparkles className="size-3.5 text-primary" aria-hidden />
+          <p className="inline-flex items-center justify-center gap-2 self-center rounded-full border border-border/60 bg-muted/50 px-3 py-1 text-xs font-medium text-black sm:self-start">
+            <Sparkles className="size-3.5 text-black" aria-hidden />
             VPN для свободного интернета
           </p>
-          <h1 className="text-balance text-3xl font-semibold leading-tight tracking-tight text-white sm:text-4xl md:text-5xl md:leading-[1.1]">
-            Пользуйтесь в интернете всем, что вам нравится
-          </h1>
+          <HeroHeadline />
           <p className="max-w-2xl text-pretty text-lg leading-relaxed text-white sm:text-xl">
             <strong className="font-medium text-white">Vipin</strong> — это
             VPN‑решение, которое даёт доступ ко всем заблокированным ресурсам в
@@ -271,34 +277,55 @@ export function VipinLanding() {
             Подключение через сайт и через бота — выберите удобный способ.
           </p>
           <div className="mt-8 grid gap-8 lg:grid-cols-2">
-            <figure className="overflow-hidden rounded-2xl border border-border/60 bg-card/80 shadow-sm backdrop-blur-sm">
-              <figcaption className="border-b border-border/50 px-4 py-3 text-sm font-medium">
-                Подключение через сайт
-              </figcaption>
-              <video
-                className="aspect-video w-full bg-black object-contain"
-                controls
-                playsInline
-                preload="metadata"
-              >
-                <source src="/vpn-site-instruction.mp4" type="video/mp4" />
-                Ваш браузер не поддерживает воспроизведение видео.
-              </video>
-            </figure>
-            <figure className="overflow-hidden rounded-2xl border border-border/60 bg-card/80 shadow-sm backdrop-blur-sm">
-              <figcaption className="border-b border-border/50 px-4 py-3 text-sm font-medium">
-                Подключение через бота (мини‑приложение)
-              </figcaption>
-              <video
-                className="aspect-video w-full bg-black object-contain"
-                controls
-                playsInline
-                preload="metadata"
-              >
-                <source src="/vpn-miniapp-instruction.mp4" type="video/mp4" />
-                Ваш браузер не поддерживает воспроизведение видео.
-              </video>
-            </figure>
+            <Card className="border border-border/60 bg-card/80 text-card-foreground shadow-sm backdrop-blur-sm">
+              <CardHeader className="border-b border-border/50 pb-4">
+                <CardTitle className="text-black">
+                  Подключение через сайт
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="p-0">
+                <div className="mx-auto w-full max-w-[min(100%,320px)]">
+                  <AspectRatio ratio={9 / 16}>
+                    <video
+                      className="absolute inset-0 size-full bg-black object-contain"
+                      controls
+                      playsInline
+                      preload="metadata"
+                      title="Подключение Vipin через сайт"
+                    >
+                      <source src="/vpn-site-instruction.mp4" type="video/mp4" />
+                      Ваш браузер не поддерживает воспроизведение видео.
+                    </video>
+                  </AspectRatio>
+                </div>
+              </CardContent>
+            </Card>
+            <Card className="border border-border/60 bg-card/80 text-card-foreground shadow-sm backdrop-blur-sm">
+              <CardHeader className="border-b border-border/50 pb-4">
+                <CardTitle className="text-black">
+                  Подключение через бота (мини‑приложение)
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="p-0">
+                <div className="mx-auto w-full max-w-[min(100%,320px)]">
+                  <AspectRatio ratio={9 / 16}>
+                    <video
+                      className="absolute inset-0 size-full bg-black object-contain"
+                      controls
+                      playsInline
+                      preload="metadata"
+                      title="Подключение Vipin через бота"
+                    >
+                      <source
+                        src="/vpn-miniapp-instruction.mp4"
+                        type="video/mp4"
+                      />
+                      Ваш браузер не поддерживает воспроизведение видео.
+                    </video>
+                  </AspectRatio>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </section>
 
